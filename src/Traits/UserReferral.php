@@ -21,6 +21,15 @@ trait UserReferral
         return url('/').'/?ref='.$this->affiliate_id;
     }
 
+    public function referred()
+    {
+        return $this->hasOne(config('referral.user_model', 'App\User'), 'affiliate_id', 'referred_by');
+    }
+
+    public function referrals() {
+        return $this->hasMany(config('referral.user_model', 'App\User'), 'referred_by', 'affiliate_id');
+    }
+
     public static function scopeReferralExists(Builder $query, $referral)
     {
         return $query->whereAffiliateId($referral)->exists();
