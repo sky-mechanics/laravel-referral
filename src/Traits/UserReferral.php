@@ -26,10 +26,8 @@ trait UserReferral
         return $query->whereAffiliateId($referral)->exists();
     }
 
-    protected static function boot()
+    public static function bootUserReferral()
     {
-        parent::boot();
-
         static::creating(function ($model) {
             if ($referredBy = Cookie::get('referral')) {
                 $model->referred_by = $referredBy;
