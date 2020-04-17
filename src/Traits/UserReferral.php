@@ -48,12 +48,6 @@ trait UserReferral
 
     protected static function generateReferral()
     {
-        $length = config('referral.referral_length', 5);
-
-        do {
-            $referral = str_random($length);
-        } while (static::referralExists($referral));
-
-        return $referral;
+        return uniqid();
     }
 }
